@@ -1,10 +1,10 @@
 <template>
   <transition-group name="fade" tag="div" @beforeEnter="beforeEnter" @enter="enter" @leave="leave">
     <div
-      class="row d-flex mb-3 align-items-center"
+      class="row mb-3 align-items-center"
       v-for="(item, index) in products"
       :key="item.id"
-      v-if="item.price<=Number(maximum)"
+      :class="checkMaximumPrice(item)"
       :data-index="index"
     >
       <div class="col-1 m-auto">
@@ -48,6 +48,14 @@ export default {
         el.className =
           "row d-flex mb-3 align-items-center animated fadeOutRight";
       }, delay);
+    },
+    checkMaximumPrice(item) {
+      if(item.price<Number(this.maximum)){
+        return 'd-flex';
+      }
+      else{
+        return 'd-none';
+      }
     }
   }
 };
